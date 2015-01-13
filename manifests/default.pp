@@ -33,6 +33,13 @@ exec { 'install elasticsearch-HQ plugin':
     require => Package['elasticsearch']
 }
 
+exec { 'install elasticsearch-head':
+    user    => 'root',
+    command => '/usr/share/elasticsearch/bin/plugin -i mobz/elasticsearch-head',
+    unless  => '/usr/bin/test -d /usr/share/elasticsearch/plugins/elasticsearch-head',
+    require => Package['elasticsearch']
+}
+
 exec { 'install elasticsearch-river-csv':
     user    => 'root',
     command => '/usr/share/elasticsearch/bin/plugin -i river-csv -url https://github.com/AgileWorksOrg/elasticsearch-river-csv/releases/download/2.1.1/elasticsearch-river-csv-2.1.1.zip',
