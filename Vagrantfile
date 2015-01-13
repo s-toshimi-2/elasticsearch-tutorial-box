@@ -13,4 +13,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "shell", inline: <<-EOT
     yum install -y puppet
   EOT
+
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = "manifests"
+    puppet.manifest_file  = "default.pp"
+    puppet.options = ["--templatedir","/tmp/vagrant-puppet-3/manifests/templates"]
+  end
 end
