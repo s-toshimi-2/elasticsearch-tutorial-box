@@ -1,0 +1,5 @@
+*.swp
+*.csv
+*.tar.gz
+datasets
+.vagrant
