@@ -36,7 +36,7 @@ exec { 'install elasticsearch-HQ plugin':
 exec { 'install elasticsearch-head':
     user    => 'root',
     command => '/usr/share/elasticsearch/bin/plugin -i mobz/elasticsearch-head',
-    unless  => '/usr/bin/test -d /usr/share/elasticsearch/plugins/elasticsearch-head',
+    unless  => '/usr/bin/test -d /usr/share/elasticsearch/plugins/head',
     require => Package['elasticsearch']
 }
 
