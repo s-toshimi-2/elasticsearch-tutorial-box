@@ -19,6 +19,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       puppet.manifests_path = "manifests"
       puppet.manifest_file  = "default.pp"
       puppet.options = ["--templatedir","/tmp/vagrant-puppet-2/manifests/templates"]
+      puppet.facter = {
+        "node_name" => "elasticsearch-web01",
+      }
     end
   end
 
@@ -33,6 +36,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       puppet2.manifests_path = "manifests"
       puppet2.manifest_file  = "default.pp"
       puppet2.options = ["--templatedir","/tmp/vagrant-puppet-2/manifests/templates"]
+      puppet2.facter = {
+        "node_name" => "elasticsearch-web02",
+      }
     end
   end
 end
