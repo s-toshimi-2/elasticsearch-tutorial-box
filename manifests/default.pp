@@ -19,11 +19,20 @@ file { '/etc/yum.repos.d/elasticsearch.repo':
     content => template('elasticsearch.repo')
 }
 
+file { '/etc/elasticsearch/elasticsearch.yml':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('elasticsearch.yml'),
+    notify  => Service['elasticsearch']
+}
+
 service { 'elasticsearch':
     enable     => true,
     ensure     => running,
     hasrestart => true,
-    require    => File['/etc/yum.repos.d/elasticsearch.repo']
+    require    => File['/etc/elasticsearch/elasticsearch.yml']
 }
 
 exec { 'install elasticsearch-HQ plugin':
