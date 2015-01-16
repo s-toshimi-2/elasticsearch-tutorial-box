@@ -19,11 +19,20 @@ file { '/etc/yum.repos.d/elasticsearch.repo':
     content => template('elasticsearch.repo')
 }
 
+file { '/etc/elasticsearch/elasticsearch.yml':
+    ensure  => present,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('elasticsearch.yml'),
+    notify  => Service['elasticsearch']
+}
+
 service { 'elasticsearch':
     enable     => true,
     ensure     => running,
     hasrestart => true,
-    require    => File['/etc/yum.repos.d/elasticsearch.repo']
+    require    => File['/etc/elasticsearch/elasticsearch.yml']
 }
 
 exec { 'install elasticsearch-HQ plugin':
@@ -36,7 +45,7 @@ exec { 'install elasticsearch-HQ plugin':
 exec { 'install elasticsearch-head':
     user    => 'root',
     command => '/usr/share/elasticsearch/bin/plugin -i mobz/elasticsearch-head',
-    unless  => '/usr/bin/test -d /usr/share/elasticsearch/plugins/elasticsearch-head',
+    unless  => '/usr/bin/test -d /usr/share/elasticsearch/plugins/head',
     require => Package['elasticsearch']
 }
 
