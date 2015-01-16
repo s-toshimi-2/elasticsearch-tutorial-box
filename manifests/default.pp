@@ -24,7 +24,7 @@ file { '/etc/elasticsearch/elasticsearch.yml':
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('elasticsearch.yml'),
+    content => template('elasticsearch.erb'),
     notify  => Service['elasticsearch']
 }
 
