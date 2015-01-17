@@ -21,7 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define :web2 do |web2|
-    web2.vm.network "private_network", ip: "192.168.33.20"
+    web2.vm.network "private_network", ip: "192.168.33.11"
 
     web2.vm.provision "puppet" do |puppet2|
       puppet2.manifest_file  = "default.pp"
