@@ -7,10 +7,11 @@ Try several things
 
 ```shell
 # Vagrant start
-$ vagrant up
+$ vagrant up web1
+$ vagrant up web2
 
-# Login
-$ vagrant ssh
+# Login to web1
+$ vagrant ssh web1
 
 # Download livedoor gourmet data
 $ cd /vagrant
