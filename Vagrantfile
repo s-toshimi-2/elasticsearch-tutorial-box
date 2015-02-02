@@ -31,4 +31,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       }
     end
   end
+
+  config.vm.define :web3 do |web3|
+    web3.vm.network "private_network", ip: "192.168.33.12"
+
+    web3.vm.provision "puppet" do |puppet3|
+      puppet3.manifest_file  = "default.pp"
+      puppet3.module_path = "modules"
+      puppet3.facter = {
+        "node_name" => "elasticsearch-web03",
+      }
+    end
+  end
 end
